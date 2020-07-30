@@ -1,0 +1,18 @@
+{{extend 'layout_community.html'}}
+
+<div class="row">
+    <div class="col-md-10" align="center">
+      <div class="box box-solid">
+          <br>
+        <h1>
+            <b>Waf2Py</b>
+            <small>Web Aplication Firewall</small> <img src="/Waf2Py/static/images/logo.png" width="115px" height="100px">
+            </h1>
+          <div class="box-body text-center">
+              <div id="particles-js"></div>
+        </div>
+      </div>
+    </div>
+</div>
+<script src="/Waf2Py/static/js/particles/particles.js"></script>
+<script src="/Waf2Py/static/js/particles/app.js"></script>

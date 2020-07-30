@@ -1,0 +1,156 @@
+{{extend 'layout_community.html'}}
+  <script>
+    jQuery(function () {
+      jQuery('#myTab a:first').tab('show')
+    });
+
+    $.fn.inlineEdit = function(replaceWith, connectWith) {
+
+      $(this).hover(function() {
+          $(this).addClass('hover');
+      }, function() {
+          $(this).removeClass('hover');
+      });
+
+      $(this).click(function() {
+
+          var elem = $(this);
+
+          elem.hide();
+          elem.after(replaceWith);
+          replaceWith.focus();
+
+          replaceWith.blur(function() {
+
+              if ($(this).val() != "") {
+                  connectWith.val($(this).val()).change();
+                  elem.text($(this).val());
+              }
+
+              $(this).remove();
+              elem.show();
+          });
+      });
+    };
+  </script>
+  <style>
+    /* The switch - the box around the slider */
+    .switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+    }
+    /* Hide default HTML checkbox */
+    .switch input {display:none;}
+    /* The slider */
+    .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+    }
+    .slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+    }
+    input:checked + .slider {
+    background-color: #2196F3;
+    }
+    input:focus + .slider {
+    box-shadow: 0 0 1px #2196F3;
+    }
+    input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+    }
+    /* Rounded sliders */
+    .slider.round {
+    border-radius: 34px;
+    }
+    .slider.round:before {
+    border-radius: 50%;
+    }
+  </style>
+
+
+<div class="row" id="roundedandsoft">
+    <div class="col-md-12">
+      <div class="nav-tabs-custom" style="z-index: 0">
+      <ul class="nav nav-tabs">
+          <li class="active">
+              <a href="#WafProtection" data-toggle="tab" aria-expanded="true">
+                  <span class="visible-xs"><i class="fa fa-shield"></i></span>
+                  <span class="hidden-xs"><i class="fa fa-shield"></i> WAF Protection</span>
+              </a>
+          </li>
+          <li class="">
+              <a href="#HTTP" data-toggle="tab" aria-expanded="false">
+                  <span class="visible-xs"><i class="fa fa-exchange"></i></span>
+                  <span class="hidden-xs"><i class="fa fa-exchange"></i> HTTP/HTTPS</span>
+              </a>
+          </li>
+          <li class="">
+              <a href="#Certificates" data-toggle="tab" aria-expanded="false">
+                  <span class="visible-xs"><i class="fa fa-certificate"></i></span>
+                  <span class="hidden-xs"><i class="fa fa-certificate"></i> Certificates</span>
+              </a>
+          </li>
+          <li class="">
+              <a href="#SSL" data-toggle="tab" aria-expanded="false">
+                  <span class="visible-xs"><i class="fa fa-lock"></i></span>
+                  <span class="hidden-xs"> <i class="fa fa-lock"></i> SSL</span>
+              </a>
+          </li>
+          <li class="">
+              <a href="#Rewrite" data-toggle="tab" aria-expanded="false">
+                  <span class="visible-xs"><i class="fa fa-magic"></i></span>
+                  <span class="hidden-xs"><i class="fa fa-magic"></i> Rewrite</span>
+              </a>
+          </li>
+          <li class="">
+              <a href="#RawConf" data-toggle="tab" aria-expanded="false">
+                  <span class="visible-xs"><i class="fa fa-space-shuttle"></i></span>
+                  <span class="hidden-xs"><i class="fa fa-space-shuttle"></i> Expert Configuration</span>
+              </a>
+          </li>
+      </ul>
+      <div class="tab-content col-md-12">
+          <div id="particles-js"></div>
+          <div class="tab-pane active" id="WafProtection">
+              
+                {{include 'default/WafProtectionModSec3.html'}}
+          </div>
+          <div class="tab-pane" id="HTTP">
+            {{include 'default/ProdEdit/http.html'}}
+          </div>
+          <div class="tab-pane" id="Certificates">
+            {{include 'default/ProdEdit/Certificates.html'}}
+          </div>
+          <div class="tab-pane" id="SSL">
+            {{include 'default/ProdEdit/SSL.html'}}
+          </div>
+          <div class="tab-pane" id="Rewrite">
+            {{include 'default/ProdEdit/Rewrite.html'}}
+          </div>
+          <div class="tab-pane" id="RawConf">
+            {{include 'default/ProdEdit/RawConf.html'}}
+          </div>
+      </div>
+  </div>
+</div>
+</div>
+<script src="/Waf2Py/static/waf2py/chartjs/Chart.min.js"></script>

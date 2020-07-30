@@ -1,0 +1,45 @@
+{{extend 'layout_community.html'}}
+<title> Action Application Logs</title>
+
+
+<div class="row">
+    <div class="col-md-12 ">
+        <div class="box">
+    <div class="box-header">
+
+
+                <table id="datatable_user_action" class="display">
+                    <thead>
+                    <tr>
+                        <th>Time</th>
+                        <th>Username</th>
+                        <th>Description</th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                      {{ for row in query: }}
+                    <tr>
+                      <td> {{=row.time}} </td>
+                      <td> {{=row.username}}</td>
+                      <td> {{=row.msg}}</td>
+
+                    </tr>
+                        {{pass}}
+                    </tbody>
+                </table>
+
+    </div>
+        </div>
+    </div>
+
+</div> <!-- End Row -->
+<script>
+    $(document).ready(function (){
+    $("#datatable_user_action").dataTable(
+        {
+            mark: true
+        }
+    )
+    });
+</script>

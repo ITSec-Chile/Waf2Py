@@ -1,0 +1,82 @@
+{{if certificate:}}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="box" id="roundedandsoft">
+            <div class="box-body table-responsive">
+                <h4><i class="fa fa-certificate"></i> Certificate</h4>
+                <textarea cols="60" rows="10" id="cert" class="form-control" spellcheck="false" style="height: 500px; font-size: 10pt">{{=certificate[0]['cert']}}</textarea>
+          
+            </div>
+        </div>
+   </div>
+    <div class="col-md-12">
+        <div class="box" id="roundedandsoft">
+            <div class="box-body table-responsive">
+                <h4><i class="fa fa-chain"></i> Chain</h4>
+                <textarea cols="60" rows="10" id="chain" class="form-control" spellcheck="false" style="height: 500px; font-size: 10pt">{{=certificate[0]['chain']}}</textarea>
+          
+            </div>
+        </div>
+   </div>
+    <div class="col-md-12">
+        <div class="box" id="roundedandsoft">
+            <div class="box-body table-responsive">
+                <h4><i class="fa fa-key"></i> Private Key</h4>
+                <textarea cols="60" rows="10" id="key" class="form-control" spellcheck="false" style="height: 500px; font-size: 10pt">{{=certificate[0]['privkey']}}</textarea>
+          
+            </div>
+        </div>
+   </div>
+    <br>
+    <div class="pull-right">
+        <button type="button" onclick="certificates()" class="btn btn-lg info_bulma"><span class="fa fa-save"></span> Save</button>
+    </div>
+</div>
+
+
+{{else:}} 
+<div class="row">
+    <div class="col-md-12">
+        <div class="box" id="roundedandsoft">
+            <div class="box-body table-responsive">
+                <h4>Certificate</h4>
+                <textarea cols="60" rows="10" id="cert" class="form-control" spellcheck="false" style="height: 500px; font-size: 10pt"></textarea>
+            </div>
+        </div>
+   </div>
+    <div class="col-md-12">
+        <div class="box" id="roundedandsoft">
+            <div class="box-body table-responsive">
+                <h4>Chain</h4>
+                <textarea cols="60" rows="10" id="chain" class="form-control" spellcheck="false" style="height: 500px; font-size: 10pt"></textarea>
+            </div>
+        </div>
+   </div>
+    <div class="col-md-12">
+        <div class="box" id="roundedandsoft">
+            <div class="box-body table-responsive">
+                <h4>Private Key</h4>
+                <textarea cols="60" rows="10" id="key" class="form-control" spellcheck="false" style="height: 500px; font-size: 10pt"></textarea>
+            </div>
+        </div>
+   </div>
+    <br>
+    <div class="pull-right">
+        <button type="button" onclick="certificates()" class="btn btn-lg info_bulma"><span class="fa fa-save"></span> Save</button>
+    </div>
+</div>
+
+  {{pass}}
+
+<script>
+function certificates() {
+  $.ajax({
+        type: "POST",
+        url: "/Waf2Py/SSL/SaveCerts/",
+        contentType: "application/x-www-form-urlencoded",
+        data: {id:'{{=query[0]['id_rand']}}',env:'prod',cert:$('#cert').val(),chain:$('#chain').val(),key:$('#key').val()}
+  })
+  };
+
+</script>

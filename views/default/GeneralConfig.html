@@ -1,0 +1,51 @@
+{{extend 'layout_community.html'}}
+
+<div class="row">
+    <div class="col-md-5">
+        <div class="box" id="roundedandsoft">
+                <div class="box-header">
+                    <img src="/Waf2Py/static/images/gear.png" width="50px" hight="50px">
+                    <h4 class="box-title">General configuration </h4>
+                </div>
+            <div class="box-body">
+                
+                <div class="form-group">
+                     {{=form}}
+                </div>
+                  
+            </div>
+        </div>
+    </div>
+    <div class="col-md-5">
+        <div class="box" id="roundedandsoft">
+                <div class="box-header">
+                    <img src="/Waf2Py/static/images/warning.png" width="50px" hight="50px">
+                    <h3 class="box-title">Attention </h3>
+                </div>
+            <div class="box-body">
+                <ul>
+                    <li>
+                        <h4>
+                        When you enable Recaptcha, first be sure the public and private key are working. DONT LOGOUT, open another browser or private mode and try to log in to see if captcha correctly set up.
+                        Be sure your domain or ip is in the white list domain for google recaptcha.
+                        </h4>
+                    </li>
+                    <li>
+                        <h4>
+                        Please test the SMPT configuration before enabling 2 Factor Autentication.
+                        </h4>
+                    </li>
+                </ul>
+                <br>
+            <hr>
+            <h4>
+                <span class="fa fa-envelope-o"></span>Test SMPT configuration
+                </h4>
+            <div class="form-group">
+                {{=test_smtp}}
+            </div>
+            </div>
+            
+        </div>
+    </div>
+</div>

@@ -1,0 +1,14 @@
+#Basura de S.O.
+[Tt]humbs.db
+*.DS_Store
+
+#Archivos personales de cada usuario
+*.sqlite
+*.log
+clients/*
+sessions/*
+errors/*
+uploads/*
+languages/*
+databases/*
+__pycache__/*

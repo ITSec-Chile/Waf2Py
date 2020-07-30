@@ -1,0 +1,67 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="box box-primary">
+			<div class="box-header">
+				<h4 class="box-title" >Error Logs</h4>
+			</div>
+			<div class="box-body table-responsive">
+
+				<table id="datatable_error_log" class="display">
+                    <thead>
+						<small>Showing last 1000 lines from error.log</small>
+                        <br>
+						<div align="right">
+                            <h4>
+                                <a class="label grey_light_bulma" onclick="download_errors()"><i class="fa fa-download "></i> Download Full log</a>
+                            </h4>
+                        </div>
+						<div id="download_errors">
+					    </div>
+						<hr>
+						
+                    <tr>
+                        <th>#</th>
+                        <th>Logs</th>
+                    </tr>
+                    </thead>
+                    <tbody><!--by now access logs will come from waf_logs function, next version will come in json from AccessLogs function-->
+					 {{counter2 = 0}}
+					 {{for row2 in error_logs: }}
+					 {{counter2 +=1}}
+						<tr>
+						  <td style="width: 10px;"> {{=counter2}} </td>
+						  <td style="max-width: 600px; text-overflow: ellipsis; overflow: hidden;"> {{=row2}}</td>
+	
+						</tr>
+                    {{pass}}
+                    </tbody>
+                </table>
+			</div>
+			<script>
+				function download_errors() {
+					// add loading image to div
+					$('#download_errors').html('<i class="fa fa-spin fa-cog">');
+			
+					// run ajax request
+					$.ajax({
+						type: "GET",
+						url: "/Waf2Py/Logs/DownloadError/{{=id_rand}}",
+						success: function (data) {
+							// replace div's content with returned data
+							$("#download_errors").html(data);
+						}
+					});
+				};
+			</script>
+		</div>
+	</div>
+</div>
+<script>
+    $(document).ready(function (){
+    $("#datatable_error_log").dataTable(
+        {
+            mark: true
+        }
+    )
+    });
+</script>

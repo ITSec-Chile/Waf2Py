@@ -1,0 +1,35 @@
+{{extend 'layout_login.html'}}
+
+                    {{if request.args(0) == 'change_password':
+                        title = 'Change Password'
+                      elif request.args(0) == 'profile':
+                        title = 'Edit Profile'
+                      else:
+                        title = 'Sign In'
+                    }}
+                    {{pass}}
+                    <h4 class="text-muted text-center"><b>{{=title}}</b></h4>
+
+                    {{
+
+                    if request.args(0)=='login':
+                        if not 'register' in auth.settings.actions_disabled:
+                            form.add_button(T('Sign Up'),URL(args='register', vars={'_next': request.vars._next} if request.vars._next else None),_class='btn btn-default')
+                        pass
+                        if not 'request_reset_password' in auth.settings.actions_disabled:
+                            #form.add_button(A('Lost Password'),URL(args='request_reset_password'),_class='btn btn-default')
+                        pass
+                    pass
+                    }}
+
+                    {{=form}}
+
+
+
+<div class="form-group m-t-30 m-b-0">
+                            <div class="col-sm-7">
+                                <a href="request_reset_password" class="text-muted"><i class="fa fa-lock m-r-5"></i> Forgot your password?</a>
+                            </div>
+
+                        </div>
+<br>

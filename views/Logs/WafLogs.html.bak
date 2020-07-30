@@ -1,0 +1,164 @@
+{{extend 'layout_community.html'}}
+
+<div class="row">
+   <div class="col-lg-12">
+       <div class="nav-tabs-custom">
+      <ul class="nav nav-tabs">
+          <li class="active">
+              <a href="#summary" data-toggle="tab" aria-expanded="false">
+                  <span class="visible-xs"><i class="fa fa-dashboard"></i></span>
+                  <span class="hidden-xs">Summary</span>
+              </a>
+          </li>
+          <li class="">
+              <a href="#logs" data-toggle="tab" aria-expanded="false">
+                  <span class="visible-xs"><i class="fa fa-search"></i></span>
+                  <span class="hidden-xs">Attacks</span>
+              </a>
+          </li>
+          <li class="">
+              <a href="#exclusions" data-toggle="tab" aria-expanded="false">
+                  <span class="visible-xs"><i class="fa fa-hand-spock-o"></i></span>
+                  <span class="hidden-xs">Manual Exclusion</span>
+              </a>
+          </li>
+          <li class="">
+              <a href="#rule_list" data-toggle="tab" id="rulesshow" aria-expanded="false">
+                  <span class="visible-xs"><i class="fa fa-book"></i></span>
+                  <span class="hidden-xs">Rules Excluded</span>
+              </a>
+          </li>
+          <li class="">
+              <a href="#dowload" id="" data-toggle="tab" aria-expanded="true">
+                  <span class="visible-xs"><i class="fa fa-download"></i></span>
+                  <span class="hidden-xs">Download Logs</span>
+              </a>
+          </li>
+          <li class="" id="accessTab">
+              <a href="#access" id="acces_show" data-toggle="tab" aria-expanded="false">
+                  <span class="visible-xs"><i class="fa fa-exchange"></i></span>
+                  <span class="hidden-xs">Access Logs</span>
+              </a>
+          </li>
+          <li class="">
+              <a href="#error" data-toggle="tab" aria-expanded="false">
+                  <span class="visible-xs"><i class="fa fa-warning"></i></span>
+                  <span class="hidden-xs">Error Logs</span>
+              </a>
+          </li>
+          <li class="">
+              <a href="#attack" data-toggle="tab" aria-expanded="false">
+                  <span class="visible-xs"><i class="fa fa-search"></i></span>
+                  <span class="hidden-xs">Attack Log</span>
+              </a>
+          </li>
+          <li class="">
+              <a href="#debug" data-toggle="tab" aria-expanded="false">
+                  <span class="visible-xs"><i class="fa fa-search"></i></span>
+                  <span class="hidden-xs">Debug Logs</span>
+              </a>
+          </li>
+      </ul>
+      <div class="tab-content">
+          <div class="tab-pane active" id="summary">
+            {{include 'Logs/Summary.html'}}
+          </div>
+          <div class="tab-pane" id="logs">
+          <small>Showing last 200 audits logs</small>
+            <div style="float: right">
+            <button type="button" id="show" class="btn btn-primary"><i class="mdi mdi-refresh"></i> Reload</button>
+            <!--<button type="button" id="show" class="btn btn-default "><i class="mdi mdi-gear"></i> Collapse All</button>-->
+            </div>
+            <br>
+            <br>
+            <div class="row">
+              <hr>
+            </div>
+            <br>
+            <div class="row">
+               <div id="loading"></div>
+            </div>
+          </div>
+          <div class="tab-pane" id="exclusions">
+            {{include 'Logs/ExcludeManual.html'}}
+          </div>
+          <div class="tab-pane" id="rule_list">
+            {{include 'Logs/RuleList.html'}}
+          </div>
+          <div class="tab-pane" id="access">
+              {{include 'Logs/AccessLogs.html'}}
+          </div>
+          <div class="tab-pane" id="error">
+              {{include 'Logs/ErrorLogs.html'}}
+          </div>
+          <div class="tab-pane" id="dowload">
+            {{include 'Logs/DownloadLogs.html'}}
+          </div>
+          <div class="tab-pane" id="attack">
+              {{include 'Logs/ModsecJson.html'}}
+          </div>
+          <div class="tab-pane" id="debug">
+              {{include 'Logs/DebugLogs.html'}}
+          </div>
+      </div>
+      </div>
+  </div>
+    
+
+<script>  
+
+$(document).ready(function() {
+    $('table.display').DataTable();
+} );
+
+</script>
+    {{include '/home/www-data/waf2py_community/applications/Waf2Py/static/js/parser_modsec3.js'}}    
+<script>
+// a key map of allowed keys
+var allowedKeys = {
+  37: 'left',
+  38: 'up',
+  39: 'right',
+  40: 'down',
+  65: 'a',
+  66: 'b'
+};
+
+// the 'official' Konami Code sequence
+var konamiCode = ['up', 'up', 'down', 'down', 'left', 'right', 'left', 'right', 'b', 'a'];
+
+// a variable to remember the 'position' the user has reached so far.
+var konamiCodePosition = 0;
+
+// add keydown event listener
+document.addEventListener('keydown', function(e) {
+  // get the value of the key code from the key map
+  var key = allowedKeys[e.keyCode];
+  // get the value of the required key from the konami code
+  var requiredKey = konamiCode[konamiCodePosition];
+
+  // compare the key with the required key
+  if (key == requiredKey) {
+
+    // move to the next key in the konami code sequence
+    konamiCodePosition++;
+
+    // if the last key is reached, activate cheats
+    if (konamiCodePosition == konamiCode.length) {
+      activateCheats();
+      konamiCodePosition = 0;
+    }
+  } else {
+    konamiCodePosition = 0;
+  }
+});
+
+function activateCheats() {
+  document.body.style.backgroundImage = "url('/static/images/nyancat.jpg')";
+
+  //var audio = new Audio('audio/pling.mp3');
+  //audio.play();
+
+  alert("cheats activated");
+}
+</script>

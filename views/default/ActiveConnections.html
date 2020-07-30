@@ -1,0 +1,62 @@
+{{extend 'layout_community.html'}}
+
+
+
+<div class="row">
+
+<div class="col-md-12">
+   <div class="box box-primary">
+        <div class="box-header">
+           <h4 class="box-title text-muted font-light">Active connections: </h4>
+           <span class="label label-primary" id="total_connections"></span>
+        </div>
+        <div class="box-body">
+            <table class="table table-hover">
+                <tbody id="connection-table">
+                    <tr>
+                        <th>#</th>
+                        <th>Source</th>
+                        <th>Destination</th>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+      </div>
+   </div>
+</div>
+
+<script type="text/javascript">
+  $.ajax({
+    type:"GET",
+    url:"/Waf2Py/default/GetActiveConnections",
+    success:function(stats){
+         var jsonData = JSON.parse(JSON.stringify(stats));
+         var connections = JSON.parse(JSON.stringify(jsonData));
+         //const keys = Object.keys(connections);
+        //for (const key of keys) {
+         // console.log(connections[key])
+        //};
+         console.log(connections.connections.length);
+         document.getElementById('total_connections').innerHTML = connections.total;
+         for (var i = 0; i < connections.connections.length; i++) {
+             console.log(connections.connections[i]);
+             var tr = document.createElement('tr');
+             var td0 = document.createElement('td');
+             var s0 = document.createTextNode(i+1);
+             var td1 = document.createElement('td');
+             var s1 = document.createTextNode(connections.connections[i][0]);
+             var td2 = document.createElement('td');
+             var s2 = document.createTextNode(connections.connections[i][1]);
+             td0.appendChild(s0);
+             td1.appendChild(s1);
+             td2.appendChild(s2);
+             tr.appendChild(td0);
+             tr.appendChild(td1);
+             tr.appendChild(td2);
+             document.getElementById('connection-table').appendChild(tr);
+         }
+     },
+  })
+
+</script>

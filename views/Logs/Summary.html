@@ -1,0 +1,68 @@
+<script src="/Waf2Py/static/waf2py/chartjs/Chart.min.js"></script>
+
+<div class="row">
+
+<div class="col-md-6">
+   <div class="box" >
+            <div class="box-header">
+               <h4 class="box-title text-muted">Attacks Summary</h4>
+            </div>
+            <div class="panel-body" width="300" height="600" >
+
+
+         <canvas id="summaryChart"></canvas>
+                <br>
+                <div align="center">
+                    <span class="label danger_bulma"><small>Critical: {{=summary.critical}}</small></span>
+                    <span class="label warning_bulma"><small>Warning: {{=summary.warning}}</small></span>
+                    <span class="label success_white_bulma"><small>Notice: {{=summary.notice}}</small></span>
+                    <span class="label danger_light_bulma"><small>Error: {{=summary.error}}</small></span>
+                    <span class="label label-default"><small>Total requests: {{=summary.total_requests}}</small></span>
+                </div>
+         </div>
+      </div>
+   </div>
+</div>
+<script>
+var ctx = document.getElementById("summaryChart").getContext('2d');
+var myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ["Critical", "Warning", "Notice", "Error", "Requests"],
+        datasets: [{
+            label: 'Hits',
+            data: [{{=summary.critical}}, {{=summary.warning}}, {{=summary.notice}}, {{=summary.error}}, {{=summary.total_requests}}],
+            backgroundColor: [
+                '#f33a5f',
+                '#fffae9',
+                '#00cba9',
+                '#ffe9ee',
+                '#f3f3f3',
+            ],
+            borderColor: [
+                '#f33a5f',
+                '#fffae9',
+                '#00cba9',
+                '#ffe9ee',
+                '#f3f3f3',
+            ],
+
+            borderWidth: 1,
+        }]
+    },
+    options: {
+				responsive: true,
+				legend: {
+                    display: false,
+					position: 'top',
+                    labels: {
+                    backgroundColor: 'rgba(121, 128, 133, 1)'
+            }
+				},
+				animation: {
+					animateScale: true,
+				}
+			}
+
+});
+</script>

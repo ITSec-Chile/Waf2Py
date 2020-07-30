@@ -1,0 +1,77 @@
+{{count_paths = 0}}
+<div class="box-body">
+    <form class="" id="PathList">
+        {{if  query[0]['paths_denied'] != "" and query[0]['paths_denied'] != None:}}
+            {{for extra_p in query[0]['paths_denied'].splitlines():}}
+                {{count_paths += 1}}
+                <div name="path_{{=count_paths}}">
+                    <div class="form-group col-md-8">
+                        <input type="text" class="form-control" name="path{{=count_paths}}" value="{{=extra_p}}" placeholder="/some/resource/admin/">
+                    </div>
+                    <div class="form-group">
+                        <a onclick={delPath('path_{{=count_paths}}')} class="btn danger_light_bulma"><span class="fa fa-close"></span></a>
+                        <hr>
+                    </div>
+                </div>
+
+            {{pass}}
+        {{else:}}
+            <div name="path_1">
+                <div class="form-group col-md-8">
+                    <input type="text" class="form-control" name="path1" value="" placeholder="/some/resource/admin/">
+                </div>
+                <div class="form-group">
+                    <a onclick={delPath('path_1')} class="btn danger_light_bulma"><span class="fa fa-close"></span></a>
+                    <hr>
+                </div>
+            </div>
+        {{pass}}
+
+    </form>
+    <form class="form-inline" role="form">
+         <div class="form-group col-md-9">
+            <a id="addPaths" class="btn success_white_bulma"><span class="fa fa-plus"></span> Add Path</a>
+        </div>
+        <div class="form-group">
+            <a onclick="savePaths()" class="btn info_bulma"><span class="fa fa-save"></span> Save</a>
+        </div>
+    </form>
+
+</div>
+<script>
+var addd_path = 1;
+var pathN = 1+{{=count_paths}};
+
+$('#addPaths').click(function () {
+    addd_path+=1;
+    pathN+=1;
+    var add_path = 'path_'+addd_path;
+    var xxx = '<div name="'+add_path+'">\
+                <div class="form-group col-md-8" >\
+                  <input type="text" class="form-control" name="path'+pathN+'" placeholder="/some/resource/admin/">\
+               </div>\
+               <div class="form-group">\
+                    <a onclick={delPath('+'"'+add_path+'"'+')} class="btn danger_light_bulma"><span class="fa fa-close"></span></a>\
+                    <hr>\
+                </div>\
+                </div>';
+    $('#PathList').append(xxx);
+
+
+});
+function delPath (add_path) {
+
+var elem = document.getElementsByName(add_path)[0];
+elem.remove();
+    };
+    
+    
+function savePaths() {
+      $.ajax({
+            type: "POST",
+            url: "/Waf2Py/Rewrite/DenyPaths",
+            contentType: "application/x-www-form-urlencoded",
+            data:$('#PathList').serialize()+'&id={{=query[0]['id_rand']}}',
+      })
+      };
+</script>

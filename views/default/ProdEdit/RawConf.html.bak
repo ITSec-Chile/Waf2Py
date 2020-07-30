@@ -1,0 +1,48 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="box" id="roundedandsoft">
+            <div class="box-body table-responsive">
+                <h4>Nginx configuration</h4>
+                <textarea cols="60" rows="10" id="nginx" class="form-control" spellcheck="false" style="width: 500px; padding:1px ">{{=query[0]['nginx_conf_data']}}</textarea>
+                <br>
+                <div>
+                    <button class="btn info_bulma" onclick="nginxdata()"> <span class="fa fa-save"></span> Save</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-md-12">
+        <div class="box" id="roundedandsoft">
+            <div class="box-body table-responsive">
+                <h4>Modsecurity configuration</h4>
+                <textarea cols="60" rows="10" id="modsec" class="form-control" spellcheck="false" style="width: 500px; padding:1px ">{{=query[0]['modsec_conf_data']}}</textarea>
+                <br>
+                <div>
+                    <button class="btn info_bulma" onclick="modsecdata()"> <span class="fa fa-save"></span> Save</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+function nginxdata() {
+  $.ajax({
+        type: "POST",
+        url: "/Waf2Py/default/EngxEdit/{{=query[0]['id_rand']}}/prod",
+        contentType: "application/x-www-form-urlencoded",
+        data: {body:$('#nginx').val()}
+  })
+  };
+function modsecdata() {
+              $.ajax({
+                    type: "POST",
+                    url: "/Waf2Py/default/ModsEdit/{{=query[0]['id_rand']}}/prod",
+                    contentType: "application/x-www-form-urlencoded",
+                    data: {body:$('#modsec').val()}
+              })
+              };
+</script>

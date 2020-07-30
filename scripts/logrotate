@@ -1,0 +1,4 @@
+#!/bin/sh
+test -x /usr/sbin/logrotate || exit 0
+ls /home/www-data/waf2py_community/applications/Waf2Py/logrotation.d | while read i; do /usr/sbin/logrotate -v /home/www-data/waf2py_community/applications/Waf2Py/logrotation.d/$i;done
+

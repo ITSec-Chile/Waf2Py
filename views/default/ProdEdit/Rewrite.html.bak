@@ -1,0 +1,42 @@
+<div class="row">
+    <div class="col-md-9">
+
+        <div class="box box-solid">
+            <div class="box-header with-border">
+              <h3 class="box-title">Insert Headers & Deny Paths</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+              <div class="box-group" id="accordion">
+                <!-- we are adding the .panel class so bootstrap.js collapse plugin detects it -->
+                <div class="panel box">
+                  <div class="box-header with-border">
+                    <h4>
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="false" class="">
+                        <span class="label primary_light_bulma"> Insert Headers</span>
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseOne" class="panel-collapse collapse" aria-expanded="false" style="">
+                    {{include 'default/ProdEdit/InsertCookie.html'}}
+                  </div>
+                </div>
+                <div class="panel box">
+                  <div class="box-header with-border">
+                    <h4 class="box-title">
+                      <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" class="collapsed" aria-expanded="false">
+                        Denied Paths
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseThree" class="panel-collapse collapse" aria-expanded="false">
+                    {{include 'default/ProdEdit/DenyPaths.html'}}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /.box-body -->
+          </div>
+
+    </div>
+</div>

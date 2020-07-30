@@ -1,0 +1,86 @@
+{{count_cookies = 0}}
+<div class="box-body">
+    <form class="form-inline" role="form" id="inputList">
+        {{#try:}}
+        {{if  query[0]['extra_headers'] != "" and query[0]['extra_headers'] != None:}}
+            {{for extra_h in query[0]['extra_headers'].splitlines():}}
+
+                {{count_cookies += 1}}
+
+                <div name="header_{{=count_cookies}}">
+                    <div class="form-group" >
+                        <input type="text" class="form-control" name="cookie{{=count_cookies}}" value="{{=extra_h.split()[0]}}" placeholder="X-Frame-Origin">
+                    </div>
+
+                    <div class="form-group m-l-10">
+                        <input type="text" class="form-control" name="cookie{{=count_cookies}}" value="{{=extra_h.split()[1]}}" placeholder="SAMEORIGIN">
+                        <a onclick={delHeaders('header_{{=count_cookies}}')} class="btn danger_light_bulma"><span class="fa fa-close"></span></a>
+                    </div>
+                    <hr>
+                </div>
+            {{pass}}
+        {{else:}}
+            <div name="header_1">
+                    <div class="form-group" >
+                        <input type="text" class="form-control" name="cookie1" value="" placeholder="X-Frame-Origin">
+                    </div>
+
+                    <div class="form-group m-l-10">
+                        <input type="text" class="form-control" name="cookie1" value="" placeholder="SAMEORIGIN">
+                        <a onclick={delHeaders('header_1')} class="btn danger_light_bulma"><span class="fa fa-close"></span></a>
+                    </div>
+                    <hr>
+                </div>
+        {{pass}}
+        {{#except:}}
+
+        {{#pass}}
+
+    </form>
+    <form class="form-inline" role="form">
+         <div class="form-group col-md-10">
+            <a id="addHeaders" class="btn success_white_bulma"><span class="fa fa-plus"></span> Add Header</a>
+        </div>
+        <div class="form-group">
+            <a onclick="saveHeaders()" class="btn info_bulma"><span class="fa fa-save"></span> Save</a>
+        </div>
+    </form>
+
+</div>
+<script>
+var addd_header = 1;
+var cookieN = 1+{{=count_cookies}};
+
+$('#addHeaders').click(function () {
+    addd_header+=1;
+    cookieN+=1;
+    var add_header = 'header_'+addd_header;
+    var zzz = '<div name="'+add_header+'">\
+                <div class="form-group" >\
+                  <input type="text" class="form-control" name="cookie'+cookieN+'" placeholder="X-Frame-Origin">\
+               </div>\
+               <div class="form-group m-l-10">\
+                  <input type="text" class="form-control" name="cookie'+cookieN+'" placeholder="SAMEORIGIN">\
+               </div>\
+                   <a onclick={delHeaders('+'"'+add_header+'"'+')} class="btn danger_light_bulma"><span class="fa fa-close"></span></a><hr></div>';
+    $('#inputList').append(zzz);
+
+
+});
+function delHeaders (add_header) {
+
+var elem = document.getElementsByName(add_header)[0];
+elem.remove();
+    };
+</script>
+
+<script>
+  function saveHeaders() {
+      $.ajax({
+            type: "POST",
+            url: "/Waf2Py/Rewrite/AddHeaders",
+            contentType: "application/x-www-form-urlencoded",
+            data:$('#inputList').serialize()+'&id={{=query[0]['id_rand']}}',
+      })
+      };
+</script>

@@ -1,0 +1,197 @@
+{{extend 'layout_community.html'}}
+{{cpu_color = 'primary_light_bulma'}}
+<script src="/Waf2Py/static/waf2py/chartjs/Chart.min.js"></script>
+<div class="row">
+    <div class="col-md-3">
+        <div class="box" id="roundedandsoft">
+                <div class="box-header">
+                    <img src="/Waf2Py/static/images/cpu.png" width="50px" hight="50px">
+                    <h4 class="box-title">CPU Usage </h4>
+                </div>
+            <div class="box-body">
+               <h2>
+                   {{if cpu_percent > 70:}}
+                   {{cpu_color = 'danger_light_bulma'}}
+                   {{pass}}
+                   <span class="label {{=cpu_color}}">{{=cpu_percent}} %</span>
+                </h2>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="box" id="roundedandsoft">
+            <div class="box-header">
+                <img src="/Waf2Py/static/images/hdd.png" width="50px" hight="50px">
+                    <h4 class="box-title">Disk Usage <span class="label primary_light_bulma"> {{=disk_percent}} %</span></h4>
+                </div>
+            <div class="box-body" >
+                <h4>
+                    <span class="label info_light_bulma">Total Space: {{=disk_total}}</span>
+                    <span class="label link_light_bulma">Space Used: {{=disk_used}}</span>
+                </h4>
+                <h4>
+                    <span class="label warning_light_bulma">Space Free: {{=disk_free}}</span>
+                </h4>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-md-4">
+        <div class="box" id="roundedandsoft">
+            <div class="box-header">
+                <img src="/Waf2Py/static/images/ram.png" width="50px" hight="50px">
+                    <h4 class="box-title">Ram Usage  <span class="label primary_light_bulma"> {{=ram_percent}} %</span></h4>
+                </div>
+            <div class="box-body pull-rigth" >
+                <h4>
+                    <span class="label info_light_bulma">Total: {{=ram_total}}</span>
+                    <span class="label link_light_bulma">Used: {{=ram_used}}</span>
+                    <span class="label warning_light_bulma">Free: {{=ram_free}}</span>
+                </h4>
+                <hr>
+                <h5 class="">Swap: <span class="label primary_light_bulma"> {{=swap_percent}} %</span>
+                    <span class="label info_light_bulma">Total: {{=swap_total}}</span>
+                    <span class="label link_light_bulma">Used: {{=swap_used}}</span>
+                    <span class="label warning_light_bulma">Free: {{=swap_free}}</span>
+                </h5>
+            </div>
+        </div>
+ </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="box" id="roundedandsoft">
+            <div class="box-header">
+                    <h4 class="box-title text-muted font-light">Attacks per Application</h4>
+                </div>
+            <div class="box-body table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th style="vertical-align: middle; text-align: center;">#</th>
+                    <th style="vertical-align: middle; text-align: center;">Application</th>
+                    <th style="vertical-align: middle; text-align: center;"><font color="#f03154">Critical</font></th>
+                    <th style="vertical-align: middle; text-align: center;"><font color="#f7b543">Warning</font></th>
+                    <th style="vertical-align: middle; text-align: center;"><font color="#5cb45b">Notice</font></th>
+                    <th style="vertical-align: middle; text-align: center;"><font color="#777">Errors</font></th>
+                    <th style="vertical-align: middle; text-align: center;"><font color="#777">Requests</font></th>
+                </tr>
+                </thead>
+                <tbody>
+                {{count_summary = 0}}
+                {{for row in summary:}}
+                {{count_summary += 1}}
+                    
+                <tr>
+                    <td style="vertical-align: middle; text-align: center;">{{=count_summary}}</td>
+                    <td style="vertical-align: middle; text-align: center;"><a href="/Logs/WafLogs/{{=row['id_rand']}}">{{=row['app_name']}}</a></td>
+                    <td style="vertical-align: middle; text-align: center;"><span class="badge danger_bulma">{{=row['critical']}}</span></td>
+                    <td style="vertical-align: middle; text-align: center;"><span class="badge warning_bulma">{{=row['warning']}}</span></td>
+                    <td style="vertical-align: middle; text-align: center;"><span class="badge success_white_bulma">{{=row['notice']}}</span></td>
+                    <td style="vertical-align: middle; text-align: center;"><span class="badge bg-black">{{=row['error']}}</span></td>
+                    <td style="vertical-align: middle; text-align: center;"><span class="badge grey_bulma">{{=row['total_requests']}}</span></td>
+                </tr>
+                {{pass}}
+                </tbody>
+            </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <div class="box" id="roundedandsoft">
+                <div class="box-header">
+                   <h4 class="box-title text-muted font-light">Most consumed application</h4>
+                </div>
+                <div class="box-body" style="width: 80%; height: 100%;" >
+                    <!-- Create a onclick event and redirect to the site logs-->
+                    <canvas id="summaryChart"></canvas>
+
+                </div>
+        </div>
+    </div>
+</div>
+    <script>
+    var ctx = document.getElementById("summaryChart").getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: [
+                {{for d in summary:}}
+                '{{=d['app_name']}}',
+                {{pass}}
+            ],
+            datasets: [{
+                label: 'Requests',
+                data: [
+                    {{for d in summary:}}
+                    {{=d['total_requests']}},
+                    {{pass}}
+                ],
+                backgroundColor: [
+                    '#008fd4',
+                    '#37bf6d',
+                    '#fffae9',
+                    '#006bd3',
+                    '#ECF9F1',
+                    '#f3f3f3',
+                    '#eaf5fb',
+                    '#e7fffc',
+                    '#fffae9',
+                    '#ebf1fb',
+
+                ],
+
+                borderColor: [
+                    '#008fd4',
+                    '#fffae9',
+                    '#37bf6d',
+                    '#006bd3',
+                    '#ECF9F1',
+                    '#f3f3f3',
+                    '#eaf5fb',
+                    '#e7fffc',
+                    '#fffae9',
+                    '#ebf1fb',
+
+                ],
+
+                borderWidth: 1,
+                options: {
+                responsive: true,
+
+                legend: {
+                    display: false,
+                },
+
+                animation: {
+                    animateScale: true,
+                }
+            }
+
+            }]
+        },
+        options: {
+                responsive: true,
+                scales: {
+                    xAxes: [{
+                        ticks: {
+                            autoSkip: false,
+                            maxRotation: 40,
+                            minRotation: 40
+                        },
+                    }],
+                },
+                legend: {
+                    position: 'right',
+                },
+
+                animation: {
+                    animateScale: true,
+                }
+            }
+
+    });
+</script>

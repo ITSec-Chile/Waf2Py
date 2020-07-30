@@ -1,0 +1,48 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="box box-primary">
+            <div class="box-header">
+                <h4 class="box-title">Download rotated logs</h4>
+                </div>
+			<div class="box-body table-responsive">
+				
+				<table id="datatable_download_logs" class="display" >
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                    <th>Log</th>
+                    <th>Type</th>
+                    <th>Size</th>
+                    <th>Date</th>
+                    <th>Download</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+					 {{counter_dlogs = 0}}
+                     {{for dlogs in logs_file:}}
+                     {{counter_dlogs += 1}}
+						<tr>
+						  <td>{{=counter_dlogs}}</td>
+                    <td>{{=dlogs['log_name']}}</td>
+                    <td>{{=dlogs['type']}}</td>
+                    <td>{{=dlogs['size']}}</td>
+                    <td>{{=dlogs['date']}}</td>
+                    <td style="text-align: center"><a href="/Waf2Py/Logs/DownloadLogZip/{{=id_rand}}/{{=dlogs['id_rand2']}}" class="btn btn-sm link_light_bulma"><span class="fa fa-download"></span> Download</a></td>
+						</tr>
+                    {{pass}}
+                    </tbody>
+                </table>
+			</div>
+           
+		</div>
+	</div>
+</div>
+<script>
+    $(document).ready(function (){
+    $("#datatable_download_logs").dataTable(
+        {
+            mark: true
+        }
+    )
+    });
+</script>

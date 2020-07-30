@@ -1,0 +1,113 @@
+<h3><small>SSL Parameters</small></h3>
+{{if certificate:}}
+<div class="col-md-2">
+    <div class="box" id="roundedandsoft">
+              <div class="box-header">
+            <h3 class="box-title">SSL Protocols:</h3>
+              </div>
+            <div class="box-body">
+                <div class="form-group">
+                    <div class="col-md-10">
+                        <div>
+                            <div class="checkbox checkbox-success">
+                                <input id="checkbox4" type="checkbox" {{=certificate[0]['protocol'][0]}}>
+                                <label for="checkbox4"> TLSv1  </label>
+                            </div>
+                            <div class="checkbox checkbox-success">
+                                <input id="checkbox5" type="checkbox" {{=certificate[0]['protocol'][1]}}>
+                                <label for="checkbox5"> TLSv1.1 </label>
+                            </div>
+                            <div class="checkbox checkbox-success">
+                                <input id="checkbox6" type="checkbox" {{=certificate[0]['protocol'][2]}}>
+                                <label for="checkbox6"> TLSv1.2 </label>
+                            </div>
+                            <div class="checkbox checkbox-success">
+                                <input id="checkbox7" type="checkbox" {{=certificate[0]['protocol'][3]}}>
+                                <label for="checkbox6"> TLSv1.3 </label>
+                            </div>
+                        </div>
+                        <br>
+                        <button type="submit" onclick="SaveProtocols()" class="btn info_bulma"><i class="fa fa-save"></i> Save</button>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-sm-6">
+    <div class="box" id="roundedandsoft">
+        <div class="box-header">
+                <h3 class="box-title">SSL prefer server ciphers: <span id="status_ssl_cipher" class="badge bg-primary">ON</span></h3>
+            </div>
+            <div class="box-body">
+                <div class="form-group">
+                    <div class="col-xs-5">
+                      <label class="switch">
+                        <input type="checkbox" id="ssl_cipher" {{=certificate[0]['prefer_cipher']}}>
+                        <div class="slider round"></div>
+                      </label>
+                    </div>
+                </div>
+            </div> 
+        <div class="box-header">
+            <h3 class="box-title">SSL ciphers: </h3>
+        </div>
+        <div class="box-body">
+
+            <div class="form-group">
+
+                <div class="col-md-10">
+                    <input type="text" name="ciphers" id="ciphers" class="form-control" value="{{=certificate[0]['ciphers']}}">
+                    <br>
+                    <button type="submit" onclick="SavedCipher()" class="btn info_bulma"><i class="fa fa-save"></i> Save</button>
+                </div>
+            </div>
+        </div> <!-- box-body -->
+    </div> <!-- box -->
+
+
+</div> <!-- col -->
+
+{{else:}}
+
+You must save the certificate and then <strong>reload</strong> this page to modify the SSL configuration
+{{pass}}
+
+<script>
+      function SaveProtocols() {
+          $.ajax({
+                type: "POST",
+                url: "/Waf2Py/SSL/SaveProtocols/",
+                contentType: "application/x-www-form-urlencoded",
+                data: {id:'{{=query[0]['id_rand']}}',1:document.getElementById('checkbox4').checked,2:document.getElementById('checkbox5').checked,3:document.getElementById('checkbox6').checked,4:document.getElementById('checkbox7').checked}
+          })
+        };
+        $('#ssl_cipher').on('click', function() {
+        var GenericStatus = this.checked ? 'On' : 'Off';
+        if (GenericStatus == 'On'){
+          $.ajax({
+             type  : 'POST',
+              url  : '/Waf2Py/SSL/CipherPrefer/',
+              data : {status:GenericStatus,id:'{{=query[0]['id_rand']}}', env:'prod'},
+          });
+          $('#status_ssl_cipher').text('ON')
+
+        } else if (GenericStatus == 'Off'){
+          $.ajax({
+             type  : 'POST',
+              url  : '/Waf2Py/SSL/CipherPrefer/',
+              data : {status:GenericStatus,id:'{{=query[0]['id_rand']}}', env:'prod'},
+          })
+        $('#status_ssl_cipher').text('OFF')
+      }
+    });
+
+    function SavedCipher() {
+        $.ajax({
+              type: "POST",
+              url: "/Waf2Py/SSL/SavedCipher/",
+              contentType: "application/x-www-form-urlencoded",
+              data: {id:'{{=query[0]['id_rand']}}',env:'prod', ciphers:$('#ciphers').val()}
+        })
+      };
+</script>

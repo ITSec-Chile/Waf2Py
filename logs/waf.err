@@ -1,0 +1,30 @@
+[2018-08-06 20:50] ERROR admin: Deploy: You must check the syntax before deploy!
+[2018-08-07 17:58] ERROR admin: cannot concatenate 'str' and 'exceptions.IOError' objects
+[2018-08-08 15:35] ERROR admin: global name 'Appname' is not defined
+[2018-08-14 16:12] ERROR admin: 'Table' object has no attribute 'select'
+[2018-08-14 16:26] ERROR admin: Add new app: Invalid characters in application URL
+[2019-01-03 15:26] ERROR admin: Manage rules: Invalid characters in post received - Debug: YES NO 
+[2019-01-03 15:26] ERROR admin: Manage rules: Invalid characters in post received - Debug: YES NO 
+[2019-01-03 15:27] ERROR admin: Manage rules: Invalid characters in post received - Debug: YES NO 5
+[2019-01-03 15:27] ERROR admin: Manage rules: Invalid characters in post received - Debug: YES NO 5
+[2019-01-03 15:28] ERROR admin: Manage rules: Invalid characters in post received - Debug: YES NO 5
+[2019-01-03 15:28] ERROR admin: Manage rules: Invalid characters in post received - Debug: YES NO 5
+[2019-01-03 15:34] ERROR admin: Manage rules: Invalid characters in post received - Debug: YES NO 5
+[2019-01-03 15:34] ERROR admin: Manage rules: Invalid characters in post received - Debug: YES NO 5
+[2019-01-03 15:38] ERROR admin: Manage rules: Invalid characters in post received - Debug: YES NO 5
+[2019-01-03 15:38] ERROR admin: Manage rules: Invalid characters in post received - Debug: YES NO 5
+[2019-01-03 15:43] ERROR admin: Manage rules: Invalid characters in post received - Debug: YES YES 5
+[2019-01-03 15:43] ERROR admin: Manage rules: Invalid characters in post received - Debug: YES YES 5
+[2019-01-03 15:43] ERROR admin: Manage rules: Invalid characters in post received - Debug: YES YES 5
+[2019-01-03 15:43] ERROR admin: Manage rules: Invalid characters in post received - Debug: YES YES 5
+[2019-01-03 15:49] ERROR admin: Manage rules: Rule: DRUPAL EXCLUSION RULESOff
+[2019-01-03 16:13] ERROR admin: Manage rules: Invalid characters in post received - Debug: YES NO 3
+[2019-01-03 16:17] ERROR admin: Manage rules: Invalid characters in post received - Debug: YES NO 2
+[2019-01-03 16:20] ERROR admin: Manage rules: Invalid characters in post received - Debug: YES NO 5
+[2019-01-03 16:20] ERROR admin: Manage rules: Invalid characters in post received - Debug: YES NO 5
+[2019-01-29 18:11] ERROR admin: list index out of range
+[2019-01-29 18:35] ERROR admin: 'Table' object has no attribute 'modsec_data_conf'
+[2019-01-29 19:14] ERROR admin: global name 'rules_base' is not defined
+[2019-01-30 18:08] ERROR admin: CreateFiles instance has no attribute 'CreateSymlinksRules'
+[2019-02-09 11:38] ERROR admin: Create app: you must enter a name 
+[2019-11-20 18:00] ERROR admin: Create app: you must enter a name 

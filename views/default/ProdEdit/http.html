@@ -1,0 +1,120 @@
+<div class="row">
+    <div class="col-md-6">
+        <div class="box" id="roundedandsoft">
+            <div class="box-body">
+                <h3 >Listen on:</h3>
+
+                <div class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <label class="col-md-2 control-label">IP:</label>
+                        <div class="col-md-10">
+                            
+                            <select class="form-control" style="width:auto" id="listen_ip" name="listen_ip">
+                              {{for ip in query2:}}
+                                  {{if query[0]['listen_ip'] == ip['iface_ip']:}}
+                                      {{used=' - Using now'}}
+                                      {{selected='selected'}}
+                                  {{else:}}
+                                      {{selected=''}}
+
+                                  {{if ip['used_by'] == None:}}
+                                      {{used=' - Available'}}
+                                  {{else:}}
+                                      {{used=' - '+ip['used_by']}}
+                                  {{pass}}
+                                  {{pass}}
+                              <option {{=selected}} value="{{=ip['iface_ip']}}">{{=ip['iface_ip']}}{{=used}}</option>
+                              {{pass}}
+                            </select>
+                            {{if not query2:}}<a href='/Waf2Py/Network/AddVirtualIps'><b>First add a virtual ip</b></a>{{pass}}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                                      <label class="col-md-2 control-label" data-toggle="tooltip" data-placement="top" title="Separate with '-' for multiples ports. Ex: 80-8080-8888"><a>Ports HTTP:</a></label>
+                                      <div class="col-md-10">
+                                          <input type="text" name="http_ports" id="http_ports" style="width:auto" class="form-control" placeholder="80-8080" value="{{=query[0]['ports_http']}}">
+                                          <br>
+
+                                      </div>
+                                  </div>
+                                  <div class="form-group">
+                                      <label class="col-md-2 control-label" data-toggle="tooltip" data-placement="top" title="Separate with '-' for multiples ports. Ex: 443-8443-4443"><a>Ports HTTPS:</a></label>
+
+                                      <div class="col-md-10">
+                                          <input type="text" name="https_ports" id="https_ports" style="width:auto" class="form-control" placeholder="443" value="{{=query[0]['ports_https']}}">
+                                          <br>
+                                          <a onclick="ListenHTTP()" class="btn info_bulma "/><span class="fa fa-save"></span> Save</a>
+                                      </div>
+                                  </div>
+                </div>
+            </div> <!-- box-body -->
+        </div> <!-- box -->
+
+        <div class="box" id="roundedandsoft">
+            <div class="box-body">
+                <h3 >Real Application IPs:</h3>
+                <form class="form-horizontal" role="form">
+                    <div class="form-group">
+                        <div class="col-md-11">
+                              <h4>
+                                  <span class="label info_light_bulma">HTTP</span>
+                            </h4>
+                            <div>
+                                <textarea cols="60" rows="5" id="BackendHTTP" style="width: 431px; height: 121px" class="form-control" spellcheck="false"  placeholder="Enter Ips with ports seperated by a new line:
+                                                                                                                                  10.10.10.10=>80                                                                                                                          200.100.100.1=>80">{{try:}}{{=query[0]['backend_ip_http']}}{{except:}}{{"Enter Ips separated new line"}}{{pass}}</textarea>
+                            </div>
+                              <script>
+                                  function BackendIps() {
+                                          $.ajax({
+                                                type: "POST",
+                                                url: "/Waf2Py/default/BackendIps/",
+                                                contentType: "application/x-www-form-urlencoded",
+                                                data: {id:'{{=query[0]['id_rand']}}',env:'prod',ips:encodeURIComponent($('#Backend').val())}
+                                          })
+                                          };
+
+                              </script>
+                             <h4>
+                                  <span class="label info_light_bulma">HTTPS</span>
+                            </h4>
+                            <div>
+                                <textarea cols="60" rows="5" id="BackendHTTPS" style="width: 431px; height: 121px" class="form-control" spellcheck="false"  placeholder="Enter Ips with ports seperated by a new line:
+                                                                                                                                  10.10.10.10=>443                                                                                                                          200.100.100.1=>4443">{{try:}}{{=query[0]['backend_ip_https']}}{{except:}}{{"Enter Ips separated new line"}}{{pass}}</textarea>
+                            </div>
+                             <br>
+                             <br>
+                            <a href="#" onclick="BackendIps()" class="btn info_bulma "/><span class="fa fa-save"></span> Save</a>
+                        </div>
+                    </div>
+                </form>
+            </div> <!-- box-body -->
+        </div> <!-- box -->
+    </div> <!-- col -->
+
+</div>
+
+<!--Scripts part-->
+<script>
+  function BackendIps() {
+          $.ajax({
+                type: "POST",
+                url: "/Waf2Py/default/BackendIps/",
+                contentType: "application/x-www-form-urlencoded",
+                data: {id:'{{=query[0]['id_rand']}}',env:'prod',http:encodeURIComponent($('#BackendHTTP').val()), https:encodeURIComponent($('#BackendHTTPS').val())}
+          })
+          }
+
+  function ListenHTTP() {
+      $.ajax({
+            type: "POST",
+            url: "/Waf2Py/default/Listen",
+            contentType: "application/x-www-form-urlencoded",
+            data: {id:'{{=query[0]['id_rand']}}',listen_ip:$('#listen_ip').val(),http_ports:$('#http_ports').val(),https_ports:$('#https_ports').val()}
+      })
+      }
+</script>
+<script>
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip(); 
+});
+</script>

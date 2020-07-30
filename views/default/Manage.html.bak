@@ -1,0 +1,154 @@
+{{extend 'layout_community.html'}}
+<div class="row">
+    <div class="col-md-6">
+        <div class="box" id="roundedandsoft">
+                <div class="box-header">
+                    <!--<img src="/Waf2Py/static/images/cpu.png" width="50px" hight="50px">-->
+                    <h4 class="box-title">Nginx actions</h4>
+                </div>
+            <div class="box-body">
+                <button type="submit" onclick="Check()" class="btn primary_light_bulma"/><span class="glyphicon glyphicon-ok"></span> Check Config</button>
+                <button type="submit" onclick="Reload()" class="btn link_light_bulma"/><i class="glyphicon glyphicon-refresh"></i> Reload</button>
+                <button type="submit" onclick="Start()" class="btn success_light_bulma"/><i class="glyphicon glyphicon-play"></i> Start Engine</button>
+                <button type="submit" onclick="Stop()" class="btn danger_light_bulma"/><i class="glyphicon glyphicon-stop"></i> Stop Engine</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="box" id="roundedandsoft">
+                <div class="box-header">
+                    <h4 class="box-title"></h4>
+                </div>
+            <div class="box-body">
+                <div id="response_div">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+  function Check() {
+      swal({
+          title: 'Check nginx configuration ?',
+          type: 'question',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Confirm',
+          cancelButtonText: 'Cancel',
+          buttonsStyling: true,
+      }).then((result) => {
+          if (result.value) {
+              $("#response_div").html('<i class="fa fa-cog fa-spin"></i>');
+              $.ajax({
+                  type: "GET",
+                  url: "/Waf2Py/default/check",
+                  //contentType: "application/x-www-form-urlencoded",
+                  //data: {id:'{{#=query[0]['id_rand']}}',env:'prod',ips:encodeURIComponent($('#Backend').val())}
+                  success: function (data) {
+                      //$("#success_div").html("");
+                      if (data == "OK") {
+                          $("#response_div").html('<div class="alert success_white_bulma">Nginx configuration is Ok</div>');
+                      } else {
+                          $("#response_div").html('<code>'+data+'</code>');
+
+                      }
+                  }
+              })
+          }
+          ;
+      })
+  }
+    function Reload() {
+        swal({
+            title: 'Reload nginx ?',
+            type: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Confirm',
+            cancelButtonText: 'Cancel',
+            buttonsStyling: true,
+        }).then((result) => {
+            if (result.value) {
+                $("#response_div").html('<i class="fa fa-cog fa-spin"></i>');
+                $.ajax({
+                    type: "GET",
+                    url: "/Waf2Py/default/reload",
+                    success: function (data) {
+                        if (data == "Reload Succesfull") {
+                            $("#response_div").html('<div class="alert success_white_bulma">Reload Succesfull</div>');
+                        } else {
+                            $("#response_div").html('<code>'+data+'</code>');
+                        }
+                    }
+                })
+            }
+            ;
+        })
+    }
+    function Start() {
+        swal({
+            title: 'Start nginx ?',
+            type: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Confirm',
+            cancelButtonText: 'Cancel',
+            confirmButtonClass: 'btn btn-success',
+            cancelButtonClass: 'btn btn-danger',
+            buttonsStyling: true,
+        }).then((result) => {
+            if (result.value) {
+                $("#response_div").html('<i class="fa fa-cog fa-spin"></i>');
+                $.ajax({
+                    type: "GET",
+                    url: "/Waf2Py/default/start",
+                    success: function (data) {
+                        if (data == "Start signal sent, wait 5 sec to nginx start") {
+                            $("#response_div").html('<div class="alert success_white_bulma">Nginx started succesfully</div>');
+                        }
+                        else if (data == "Nginx is already running") {
+                            $("#response_div").html('<div class="alert info_light_bulma">Nginx is already running</div>');
+                        }
+                        else {
+                            $("#response_div").html('<code>'+data+'</code>');
+                        }
+                    }
+                })
+            }
+            ;
+        })
+    }
+    function Stop() {
+        swal({
+            title: 'Stop nginx ?',
+            type: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Confirm',
+            cancelButtonText: 'Cancel',
+            buttonsStyling: true,
+        }).then((result) => {
+            if (result.value) {
+                $("#response_div").html('<i class="fa fa-cog fa-spin"></i>');
+                $.ajax({
+                    type: "GET",
+                    url: "/Waf2Py/default/stop",
+                    success: function (data) {
+                        if (data == "Nginx Stopped") {
+                            $("#response_div").html('<div class="alert warning_light_bulma">Nginx has been stoped</div>');
+                        } else {
+                            $("#response_div").html('<code>'+data+'</code>');
+                        }
+                    }
+                })
+            }
+            ;
+        })
+    }
+
+</script>

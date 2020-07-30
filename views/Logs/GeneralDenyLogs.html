@@ -1,0 +1,32 @@
+{{extend 'layout_community.html'}}
+
+<div class="row">
+<div class="col-md-12">
+    <div class="box box-primary">
+        <div class="box-body">
+                    <small>Showing last 400 logs</small>
+                    <table id="datatable-buttons" class="display">
+                        <thead>
+                        <tr>
+                          <th style="width: 10px">#</th>
+                          <th>Message</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                          {{count = 0}}
+                          {{for row in msg.splitlines():}}
+                          {{count += 1}}
+                          <tr>
+                            <td>{{=count}}</td>
+                            <td>{{=row}}</td>
+                          </tr>
+                          {{pass}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+</div>
+    </div>
+</div>
+</div>

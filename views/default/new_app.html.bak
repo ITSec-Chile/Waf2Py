@@ -1,0 +1,68 @@
+{{extend 'layout_community.html'}}
+
+
+<div class="row">
+    <div class="col-md-3">
+        <div class="box" id="roundedandsoft">
+            <div class="box-body">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Add a new Application</h3>
+                </div>
+
+
+                <form role="form" enctype="multipart/form-data" action="/Waf2Py/default/CreateNewApp" method="post">
+                    <div class="form-group">
+                        <label for="ApplicationName">Application Name</label>
+                        <input type="text" class="form-control" name="name" placeholder="Ex: Customer_name (without spaces)">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Application url</label>
+                        <input type="text" class="form-control" name="app_url" placeholder="www.customer.com">
+                    </div>
+                    <button type="submit" class="info_bulma"><i class="fa fa-save"></i> Save</button>
+                </form>
+            </div><!-- panel-body -->
+        </div> <!-- panel -->
+    </div>
+    <div class="col-md-9">
+        <div class="box" id="roundedandsoft">
+            <div class="box-body table-responsive">
+                <div class="box-header with-border">
+                  <h3 class="box-title">Applications pending to review...</h3>
+                </div>
+                        <table class="table table-hover">
+                            <thead>
+                            <tr>
+                                <th style="width:auto">Name</th>
+                                <th style="width:auto">Application url</th>
+                                <th style="width:auto">Status</th>
+                                <th style="width: auto">Author</th>
+                                <th style="width: auto">Actions</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                           {{for row in query:}}        
+                            <td>{{=row['name']}}</td>
+                            <td>{{=row['app_name']}}</td>
+                            <td><span class="label success_light_bulma">Ready to deploy</span></td>
+                            <td><span class="label info_light_bulma">{{=row['autor']}}</span></td>
+                            <td style="vertical-align: middle;"><a class="btn btn-xs success_bulma" href="{{=URL('default','deploy/'+row['id_rand'])}}"><font color="white"><i class="fa fa-rocket"></i> Deploy !</font></a>    <a class="btn btn-xs danger_bulma" href="{{=URL('default','DeleteNewApp/'+row['id_rand'])}}"><i class="fa fa-trash"></i> Delete</a></td>
+
+                            </tr>
+                            {{pass}}
+                            <tr>
+                            </tbody>
+                        </table>
+            </div>
+        </div>
+    </div>
+
+
+<script>
+$(document).ready(function($) {
+    $(".clickable-row").click(function() {
+        window.location = $(this).data("href");
+    });
+});
+
+</script>

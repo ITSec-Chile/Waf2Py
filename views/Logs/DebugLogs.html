@@ -1,0 +1,66 @@
+<div class="row">
+	<div class="col-md-12">
+		<div class="box box-primary">
+            <div class="box-header">
+               <h4 class="box-title">Debug Logs</h4>
+                </div>
+			<div class="box-body table-responsive">
+				
+				<table id="datatable_debug_log" class="display" >
+                    <thead>
+                         <small>Showing last 1000 lines from debug.log</small>
+                        <br>
+						<div align="right">
+                            <h4>
+                                <a class="label grey_light_bulma" onclick="download_debug()"><i class="fa fa-download "></i> Download Full log</a>
+                            </h4>
+                        </div>
+						<div id="download_debug">
+					    </div>
+						<hr>
+                    <tr>
+                        <th>#</th>
+                        <th>Logs</th>
+                    </tr>
+                    </thead>
+                    <tbody><!--by now debug logs will come from waf_logs function, next version will come in json from AccessLogs function-->
+					 {{counter_debug = 0}}
+					 {{for debug in debug_logs: }}
+					 {{counter_debug +=1}}
+						<tr>
+						  <td style="width: 10px;" >{{=counter_debug}} </td>
+						  <td style="max-width: 600px; text-overflow: ellipsis; overflow: hidden;"> {{=debug}}</td>
+	
+						</tr>
+                    {{pass}}
+                    </tbody>
+                </table>
+			</div>
+            <script>
+				function download_debug() {
+					// add loading image to div
+					$('#download_debug').html('<i class="fa fa-spin fa-cog">');
+			
+					// run ajax request
+					$.ajax({
+						type: "GET",
+						url: "/Waf2Py/Logs/DownloadDebug/{{=id_rand}}",
+						success: function (data) {
+							// replace div's content with returned data
+							$("#download_debug").html(data);
+						}
+					});
+				};
+			</script>
+		</div>
+	</div>
+</div>
+<script>
+    $(document).ready(function (){
+    $("#datatable_debug_log").dataTable(
+        {
+            mark: true
+        }
+    )
+    });
+</script>
