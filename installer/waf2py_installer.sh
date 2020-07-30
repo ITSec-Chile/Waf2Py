@@ -267,7 +267,8 @@ ls /home/www-data/waf2py_community/applications/Waf2Py/logrotation.d | while rea
 cp /usr/src/waf/ModSecurity/unicode.mapping /opt/waf/nginx/etc/
 cp /home/www-data/waf2py_community/applications/Waf2Py/geoip/GeoIP.dat /opt/waf/nginx/etc/geoip/
 cp /home/www-data/waf2py_community/applications/Waf2Py/geoip/GeoLiteCity.dat /opt/waf/nginx/etc/geoip/
-chown -R www-data:www-data /home/www-data/waf2py_community
+chown -R www-data:www-data /home/www-data
+chown -R www-data:www-data /home/www-data/*
 echo -e "\e[32mRebooting system\e[39m"
 /sbin/reboot
 
