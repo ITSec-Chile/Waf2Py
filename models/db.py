@@ -408,13 +408,13 @@ SecResponseBodyLimitAction ProcessPartial
 # This default setting is chosen due to all systems have /tmp available however, 
 # this is less than ideal. It is recommended that you specify a location that's private.
 #
-SecTmpDir /tmp/#grabthis
+SecTmpDir /tmp/
 
 # The location where ModSecurity will keep its persistent data.  This default setting 
 # is chosen due to all systems have /tmp available however, it
 # too should be updated to a place that other users can't access.
 #
-SecDataDir /tmp/#grabthis
+SecDataDir /tmp/
 
 
 # -- File uploads handling configuration -------------------------------------
