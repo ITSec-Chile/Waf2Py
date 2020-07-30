@@ -253,7 +253,7 @@ if db(db.auth_user.id > 0).isempty():
             password = db.auth_user.password.validate('admin')[0],
             email = 'changeme@waf2py.org',
             )
-modsec3_config = """
+modsec3_default_config = """
 # Improve the quality of ModSecurity by sharing information about your
 # current ModSecurity version and dependencies versions.
 # The following information will be shared: ModSecurity version,
@@ -504,10 +504,8 @@ SecUnicodeMapFile ../unicode.mapping 20127
 # Web Server version, APR version, PCRE version, Lua version, Libxml2
 # version, Anonymous unique id for host.
 """
-if db(db.basic_conf.modsec3_data_conf).isempty():
-    db.basic_conf.update_or_insert(db.basic_conf.id == 1, modsec3_data_conf=modsec3_config)
 
-nginx_config = """
+nginx_default_conf = """
 server {
         server_name SrvName SrvNameAlias;
         set $vhost vhost_id;
@@ -599,5 +597,11 @@ server {
         ssl_session_cache shared:SSL6:16m;
     }
 """
+if db(db.basic_conf.modsec3_data_conf).isempty():
+    db.basic_conf.update_or_insert(db.basic_conf.id == 1, modsec3_default_config=modsec3_default_config)
+
+
 if db(db.basic_conf.nginx_data_conf).isempty():
-    db.basic_conf.update_or_insert(db.basic_conf.id == 1, nginx_data_conf=nginx_config)
+    db.basic_conf.update_or_insert(db.basic_conf.id == 1, nginx_default_conf=nginx_default_conf)
+
+
