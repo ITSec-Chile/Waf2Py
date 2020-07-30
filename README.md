@@ -77,6 +77,12 @@ Nginx running and apps running = Nginx is running an there is at least 1 web app
       --> Press the "play" button to enable the new app
       --> Done.
 ```
+## Cronjobs
+There is used to restore the virtual interface and bring up nginx when on every reboot
+There is a cronjob to update the dashboard stadistics every 5 minutes
+There is a cronjob for log rotation every night. Rotated logs are available under "Download logs" tab.
+
+
 
 ## Built With
 
