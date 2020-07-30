@@ -248,8 +248,8 @@ fastcgi_param GEOIP_LATITUDE $geoip_latitude;
 fastcgi_param GEOIP_LONGITUDE $geoip_longitude;' > /opt/waf/nginx/etc/geoip/fastcgi.conf
 cd $current_dir 
 cp nginx.conf /opt/waf/nginx/etc/
-cp *.html/opt/waf/nginx/etc/static/html/
-
+cp 403.html/opt/waf/nginx/etc/static/html/
+cp 404.html/opt/waf/nginx/etc/static/html/
 # adjust permissions
 chown www-data /opt/waf/nginx/var/log/
 chown www-data /opt/waf/nginx/etc/{sites-available,sites-enabled,modsecurity_conf,modsec_rules,backend,listen,ssl}
