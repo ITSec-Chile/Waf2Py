@@ -140,8 +140,8 @@ cd $current_dir
 
 #Create crontabs
 echo '
-@reboot  /usr/bin/python3 /home/www-data/waf2py_community/applications/Waf2Py/scripts/check_services.py
 @reboot  sleep 10; /usr/bin/nohup /home/www-data/waf2py_community/applications/Waf2Py/scripts/nginx_start_check.sh >/dev/null 2>&1 &
+@reboot  /usr/bin/python3 /home/www-data/waf2py_community/applications/Waf2Py/scripts/check_services.py
 2 0 * * * /usr/bin/python3 /home/www-data/waf2py_community/applications/Waf2Py/scripts/index_logs_files.py
 0 */2 * * * /bin/bash /home/www-data/waf2py_community/applications/Waf2Py/scripts/remove_tmp.sh
 1 0 * * * /bin/bash /home/www-data/waf2py_community/applications/Waf2Py/scripts/logrotate
