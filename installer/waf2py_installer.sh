@@ -134,8 +134,7 @@ www-data ALL=(ALL) NOPASSWD: /sbin/route
 www-data ALL=(ALL) NOPASSWD: /usr/bin/lsof
 ' >> /etc/sudoers.d/Waf2Py
 cd $current_dir
-echo -e "\e[32mRestarting apache\e[39m"
-service apache2 restart
+
 #Create crontabs
 echo '
 @reboot  /usr/bin/python3 /home/www-data/waf2py_community/applications/Waf2Py/scripts/check_services.py
@@ -146,11 +145,6 @@ echo '
 */5 * * * * /usr/bin/python3 /home/www-data/waf2py_community/applications/Waf2Py/scripts/summary.py
 ' >> /var/spool/cron/crontabs/root
 
-#Create logrotation folder andscript
-echo '#!/bin/sh
-test -x /usr/sbin/logrotate || exit 0
-ls /home/www-data/waf2py_community/applications/Waf2Py/logrotation.d | while read i; do /usr/sbin/logrotate -v /home/www-data/waf2py_community/applications/Waf2Py/logrotation.d/$i;done
-' > /home/www-data/waf2py_community/applications/Waf2Py/scripts/logrotate
 
 
 #Download and Compile the ModSecurity 3.0 Source Code
@@ -235,11 +229,6 @@ cd /opt/waf/nginx/etc/crs/owasp-modsecurity-crs
 sed -i 's/SecDefaultAction/#SetDefaultAction/g' crs-setup.conf
 cd /usr/src/waf
 
-
-# put files in place
-cp /usr/src/waf/ModSecurity/unicode.mapping /opt/waf/nginx/etc/
-cp /home/www-data/waf2py_community/applications/Waf2Py/geoip/GeoIP.dat /opt/waf/nginx/etc/geoip/
-cp /home/www-data/waf2py_community/applications/Waf2Py/geoip/GeoLiteCity.dat /opt/waf/nginx/etc/geoip/
 echo '
 ### SET GEOIP Variables ###
 fastcgi_param GEOIP_COUNTRY_CODE $geoip_country_code;
@@ -256,7 +245,7 @@ fastcgi_param GEOIP_LATITUDE $geoip_latitude;
 fastcgi_param GEOIP_LONGITUDE $geoip_longitude;' > /opt/waf/nginx/etc/geoip/fastcgi.conf
 cd $current_dir 
 cp nginx.conf /opt/waf/nginx/etc/
-cp *.html/opt/waf/nginx/etc/static/html/
+cp 40*.html/opt/waf/nginx/etc/static/html/
 
 # adjust permissions
 chown www-data /opt/waf/nginx/var/log/
@@ -265,6 +254,16 @@ chown www-data -R /opt/waf/nginx/etc/{rewrite,crs}
 
 cd ..
 mv Waf2Py /home/www-data/waf2py_community/applications/
+#Create logrotation folder andscript
+echo '#!/bin/sh
+test -x /usr/sbin/logrotate || exit 0
+ls /home/www-data/waf2py_community/applications/Waf2Py/logrotation.d | while read i; do /usr/sbin/logrotate -v /home/www-data/waf2py_community/applications/Waf2Py/logrotation.d/$i;done
+' > /home/www-data/waf2py_community/applications/Waf2Py/scripts/logrotate
+
+# put files in place
+cp /usr/src/waf/ModSecurity/unicode.mapping /opt/waf/nginx/etc/
+cp /home/www-data/waf2py_community/applications/Waf2Py/geoip/GeoIP.dat /opt/waf/nginx/etc/geoip/
+cp /home/www-data/waf2py_community/applications/Waf2Py/geoip/GeoLiteCity.dat /opt/waf/nginx/etc/geoip/
 chown -R www-data:www-data /home/www-data/waf2py_community
 echo -e "\e[32mRebooting system\e[39m"
 /sbin/reboot
