@@ -528,7 +528,7 @@ server {
          
         #Modsecurity block
         modsecurity ModSecStatus; #ModSecStatus
-        modsecurity_rules_file /opt/waf/nginx/etc/tmp/modsecurity_conf/SrvName_modsec.conf; #Cambiar
+        modsecurity_rules_file /opt/waf/nginx/etc/modsecurity_conf/SrvName_modsec.conf; #Cambiar
 
         #Page Speed Block
         #pagespeed off;
