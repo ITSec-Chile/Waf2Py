@@ -597,11 +597,13 @@ server {
         ssl_session_cache shared:SSL6:16m;
     }
 """
-if db(db.basic_conf.modsec3_data_conf).isempty():
-    db.basic_conf.update_or_insert(db.basic_conf.id == 1, modsec3_default_config=modsec3_default_config)
+try:
+    if db(db.basic_conf.modsec3_data_conf).isempty():
+        db.basic_conf.update_or_insert(db.basic_conf.id == 1, modsec3_data_conf=modsec3_default_config)
 
 
-if db(db.basic_conf.nginx_data_conf).isempty():
-    db.basic_conf.update_or_insert(db.basic_conf.id == 1, nginx_default_conf=nginx_default_conf)
-
+    if db(db.basic_conf.nginx_data_conf).isempty():
+        db.basic_conf.update_or_insert(db.basic_conf.id == 1, nginx_data_conf=nginx_default_conf)
+except:
+    pass
 
