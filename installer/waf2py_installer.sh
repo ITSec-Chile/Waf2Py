@@ -7,7 +7,7 @@ pip3 install psutil netifaces geoip
 #Create the ssl folder and delete default sites of apache
 rm /etc/apache2/sites-enabled/*.conf
 mkdir /etc/apache2/ssl
-clear
+
 #Configure the 62443 port in apache & Enable some apache modules
 echo -e  "\e[32mConfigure the 62443 port in apache & Enable some apache modules\e[39m"
 cd /etc/apache2/
@@ -25,7 +25,7 @@ sudo a2enmod ssl
 sudo a2enmod headers
 sudo a2enmod expires
 sudo a2enmod wsgi
-clear
+
 
 #Creating the apache config
 echo -e "\e[32mCreating the apache config\e[39m"
@@ -152,7 +152,7 @@ test -x /usr/sbin/logrotate || exit 0
 ls /home/www-data/waf2py_community/applications/Waf2Py/logrotation.d | while read i; do /usr/sbin/logrotate -v /home/www-data/waf2py_community/applications/Waf2Py/logrotation.d/$i;done
 ' > /home/www-data/waf2py_community/applications/Waf2Py/scripts/logrotate
 
-clear
+
 #Download and Compile the ModSecurity 3.0 Source Code
 echo -e "\e[32mDownload and Compile the ModSecurity 3.0 Source Code\e[39m"
 mkdir -p /usr/src/waf
