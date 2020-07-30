@@ -255,7 +255,7 @@ chown www-data /opt/waf/nginx/var/log/
 chown www-data /opt/waf/nginx/etc/{sites-available,sites-enabled,modsecurity_conf,modsec_rules,backend,listen,ssl}
 chown www-data -R /opt/waf/nginx/etc/{rewrite,crs}
 
-cd ..
+cd ../../
 mv Waf2Py /home/www-data/waf2py_community/applications/
 #Create logrotation folder andscript
 echo '#!/bin/sh
