@@ -117,8 +117,8 @@ rm -r /home/www-data/waf2py_community/applications/welcome
 echo -e "\e[32mSet up the admin password for Web2Py administration\e[39m"
 echo -e "\e[33m[!]Change the admin password for the admin interface of web2py\e[39m"
 cd /home/www-data/waf2py_community
-sudo -u www-data python3 -c "from gluon.widget import console; console(3);"
-sudo -u www-data python3 -c "from gluon.main import save_password; save_password(input('Choose an admin password for web2py admin: '),62443)"
+python3 -c "from gluon.widget import console; console(3);"
+python3 -c "from gluon.main import save_password; save_password(input('Choose an admin password for web2py admin: '),62443)"
 cd ../
 
 #Add user www-data to sudo
