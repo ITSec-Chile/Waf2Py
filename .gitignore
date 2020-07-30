@@ -4,6 +4,7 @@
 
 #Archivos personales de cada usuario
 *.sqlite
+*.table
 *.log
 *.py.bak
 *.py.1
