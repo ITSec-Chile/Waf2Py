@@ -102,8 +102,6 @@ unzip web2py_src.zip
 mv web2py waf2py_community
 mv /home/www-data/waf2py_community/handlers/wsgihandler.py /home/www-data/waf2py_community/wsgihandler.py
 cd $current_dir
-tar xvzf Waf2Py.tar.gz
-mv Waf2Py /home/www-data/waf2py_community/applications/
 echo "
 routers = dict( 
     BASE = dict( 
@@ -117,7 +115,6 @@ rm -r /home/www-data/waf2py_community/applications/welcome
 
 #Set up the admin password for Web2Py administration
 echo -e "\e[32mSet up the admin password for Web2Py administration\e[39m"
-chown -R www-data:www-data /home/www-data/waf2py_community
 echo -e "\e[33m[!]Change the admin password for the admin interface of web2py\e[39m"
 cd /home/www-data/waf2py_community
 sudo -u www-data python3 -c "from gluon.widget import console; console(3);"
@@ -266,6 +263,9 @@ chown www-data /opt/waf/nginx/var/log/
 chown www-data /opt/waf/nginx/etc/{sites-available,sites-enabled,modsecurity_conf,modsec_rules,backend,listen,ssl}
 chown www-data -R /opt/waf/nginx/etc/{rewrite,crs}
 
+cd ..
+mv Waf2Py /home/www-data/waf2py_community/applications/
+chown -R www-data:www-data /home/www-data/waf2py_community
 echo -e "\e[32mRebooting system\e[39m"
 /sbin/reboot
 
