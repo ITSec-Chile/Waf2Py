@@ -25,7 +25,7 @@ Waf2Py is a nice and easy to use web interface for modsecurity v3 with nginx con
 
 ## Compiled version
 You can download a compiled version, the bundle contains a compiled version of nginx and modsecurity in a debian 10 system, also contains a copy a of web2py framework with waf2py app loaded, and a script which install some dependences and put everything in his place.
-you can find this in the releases section
+you can find this in the releases section: https://github.com/ITSec-Chile/Waf2Py/releases
 
 
 
@@ -34,7 +34,7 @@ you can find this in the releases section
 
 ```
 git clone https://github.com/ITSec-Chile/Waf2Py
-cd Waf2Py
+cd Waf2Py/installer/
 su root
 chmod +x waf2py_installer.sh
 #the following script will download and compile the components needed.
