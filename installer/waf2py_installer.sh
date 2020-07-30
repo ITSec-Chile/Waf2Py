@@ -1,6 +1,6 @@
 #!/bin/bash
 #add /sbin to path
-PATH=$PATH:/sbin/ldconfig
+PATH=$PATH:/sbin
 export PATH
 current_dir=$(pwd)
 #Install some deps
