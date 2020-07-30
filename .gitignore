@@ -5,10 +5,8 @@
 #Archivos personales de cada usuario
 *.sqlite
 *.log
-clients/*
-sessions/*
-errors/*
-uploads/*
-languages/*
-databases/*
-__pycache__/*
+*.py.bak
+*.py.1
+*.html.bak
+*.err
+__pycache__/
