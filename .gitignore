@@ -1,8 +1,6 @@
-#Basura de S.O.
 [Tt]humbs.db
 *.DS_Store
-
-#Archivos personales de cada usuario
+*.pyc
 *.sqlite
 *.table
 *.log
