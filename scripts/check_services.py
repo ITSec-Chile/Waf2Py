@@ -46,8 +46,6 @@ for row in cursor:
 		logging.info("Creating interface " + row[1] + " with ip address " + row[0] +  "...")
 		process2 = subprocess.Popen(['/sbin/ifconfig', row[1], row[0], 'netmask', '255.255.255.0'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 		ok, nok = process2.communicate()
-		print(ok)
-		print(nok)
 		if nok:
 			nok = nok.replace('\n','')
 			logging.error(nok)
