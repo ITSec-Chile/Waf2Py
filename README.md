@@ -41,6 +41,19 @@ chmod +x waf2py_installer.sh
 ./waf2py_installer.sh
 ```
 
+After the installation you need to run the command "crontab -e" as "root", select an editor and save the file without making any change. 
+waf2py need crontajobs but they will are not active until  **crontab: installing new crontab** message is returned.
+
+Example:
+```
+root@debian:/home/chris# crontab -e
+Select an editor.  To change later, run 'select-editor'.
+  1. /bin/nano        <---- easiest
+  2. /usr/bin/vim.tiny
+
+Choose 1-2 [1]: 1
+**crontab: installing new crontab**
+```
 
 
 once is installed go to:
@@ -81,6 +94,7 @@ Nginx running and apps running = Nginx is running an there is at least 1 web app
 There is used to restore the virtual interface and bring up nginx when on every reboot
 There is a cronjob to update the dashboard stadistics every 5 minutes
 There is a cronjob for log rotation every night. Rotated logs are available under "Download logs" tab.
+
 
 
 
