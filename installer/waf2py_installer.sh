@@ -140,12 +140,17 @@ cd $current_dir
 
 #Create crontabs
 echo '
-@reboot  sleep 10; /usr/bin/nohup /home/www-data/waf2py_community/applications/Waf2Py/scripts/nginx_start_check.sh >/dev/null 2>&1 &
 @reboot  /usr/bin/python3 /home/www-data/waf2py_community/applications/Waf2Py/scripts/check_services.py
 2 0 * * * /usr/bin/python3 /home/www-data/waf2py_community/applications/Waf2Py/scripts/index_logs_files.py
 0 */2 * * * /bin/bash /home/www-data/waf2py_community/applications/Waf2Py/scripts/remove_tmp.sh
 1 0 * * * /bin/bash /home/www-data/waf2py_community/applications/Waf2Py/scripts/logrotate
 */5 * * * * /usr/bin/python3 /home/www-data/waf2py_community/applications/Waf2Py/scripts/summary.py
+* * * * * /usr/bin/sleep 10; /bin/bash /home/www-data/waf2py_community/applications/Waf2Py/scripts/nginx_start_check.sh
+* * * * * /usr/bin/sleep 20; /bin/bash /home/www-data/waf2py_community/applications/Waf2Py/scripts/nginx_start_check.sh
+* * * * * /usr/bin/sleep 30; /bin/bash /home/www-data/waf2py_community/applications/Waf2Py/scripts/nginx_start_check.sh
+* * * * * /usr/bin/sleep 40; /bin/bash /home/www-data/waf2py_community/applications/Waf2Py/scripts/nginx_start_check.sh
+* * * * * /usr/bin/sleep 50; /bin/bash /home/www-data/waf2py_community/applications/Waf2Py/scripts/nginx_start_check.sh
+* * * * * /usr/bin/sleep 60; /bin/bash /home/www-data/waf2py_community/applications/Waf2Py/scripts/nginx_start_check.sh
 ' >> /var/spool/cron/crontabs/root
 
 
