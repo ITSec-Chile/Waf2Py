@@ -22,7 +22,7 @@ Waf2Py is a nice and easy to use web interface for modsecurity v3 with nginx con
 - Two-step Login Authentication (Email code)
 - Writed on Python3
 
-##Photos
+## Images
 
 https://photos.app.goo.gl/kXrsQTPPMuAXi8Tr5
 
