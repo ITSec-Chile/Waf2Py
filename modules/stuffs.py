@@ -179,7 +179,7 @@ class Nginx:
             #        self.response = 'Failed, I could not start nginx'
             #except:
             #self.response = 'Failed, I could not start nginx',
-            self.response = 'Start signal sent, wait 5 sec to nginx start'
+            self.response = 'Start signal sent, NGINX will start in shortly'
 
         else:
             self.response = 'Nginx is already running'
