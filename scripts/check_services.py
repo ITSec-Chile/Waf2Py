@@ -60,27 +60,7 @@ for row in cursor:
 # 								         Check Nginx												  	  #
 ###########################################################################################################
 
-check = subprocess.Popen(['sudo', '/bin/netstat', '-tulpen'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-out = check.communicate()
-p1 = subprocess.Popen(['ps', 'aux'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-p2 = subprocess.Popen(['grep', 'nginx'], stdin=p1.stdout, stdout=subprocess.PIPE)
-running = p2.communicate()[0]
-
-if 'nginx' in str(out):
-	#nginx is running and listening
-	logging.debug("Nginx is running and listening")
-elif 'master process' in str(running):
-	#nginx running but no listening
-	logging.info("Nginx is running but not listening")
-	
-else:
-	#nginx is not running
-	logging.info("Nginx is not running, try running...")
-	start = subprocess.Popen(['sudo', '/opt/waf/nginx/sbin/nginx'], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-	ok,nok = start.communicate()
-	if nok:
-		nok = str(nok).replace('\n','')
-		logging.error(nok)
+subprocess.call(['sudo', '/opt/waf/nginx/sbin/nginx'])
  
 ###########################################################################################################
 # 								         Check Routes 												  		  #
