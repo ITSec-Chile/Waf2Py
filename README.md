@@ -1,7 +1,7 @@
 
 # Waf2Py
 
-Waf2Py is a nice and easy to use web interface for modsecurity v3 with nginx connector. Waf2Py is free and powered by Web2Py that controls modsecurity and nginx configuration in an easy way, allowing you to configure protection for any web application in just minutes.
+Waf2Py is a Web Application Firewall (WAF) using NGINX and ModSecurity. Waf2Py provide a nice and easy to use web interface powered by Web2Py that controls modsecurity and nginx configuration in an easy way, allowing you to configure protection for any web application in just minutes.
 
 ## Features
 
