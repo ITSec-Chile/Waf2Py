@@ -146,11 +146,6 @@ echo '
 1 0 * * * /bin/bash /home/www-data/waf2py_community/applications/Waf2Py/scripts/logrotate
 */5 * * * * /usr/bin/python3 /home/www-data/waf2py_community/applications/Waf2Py/scripts/summary.py
 * * * * * /usr/bin/sleep 10; /bin/bash /home/www-data/waf2py_community/applications/Waf2Py/scripts/nginx_start_check.sh
-* * * * * /usr/bin/sleep 20; /bin/bash /home/www-data/waf2py_community/applications/Waf2Py/scripts/nginx_start_check.sh
-* * * * * /usr/bin/sleep 30; /bin/bash /home/www-data/waf2py_community/applications/Waf2Py/scripts/nginx_start_check.sh
-* * * * * /usr/bin/sleep 40; /bin/bash /home/www-data/waf2py_community/applications/Waf2Py/scripts/nginx_start_check.sh
-* * * * * /usr/bin/sleep 50; /bin/bash /home/www-data/waf2py_community/applications/Waf2Py/scripts/nginx_start_check.sh
-* * * * * /usr/bin/sleep 60; /bin/bash /home/www-data/waf2py_community/applications/Waf2Py/scripts/nginx_start_check.sh
 ' >> /var/spool/cron/crontabs/root
 
 
