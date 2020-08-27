@@ -464,11 +464,6 @@ SecAuditLogRelevantStatus "^(?:5|4)"
 # Log everything we know about a transaction.
 SecAuditLogParts ABCHIZ
 
-# Specify the path for concurrent audit logging.
-#SecAuditLogType Concurrent
-#SecAuditLogStorageDir /opt/waf/nginx/var/log/SrvName/audit_logs
-#SecAuditLog /opt/waf/nginx/var/log/SrvName/audit_logs/vhost_id_SrvName_audit.log
-
 
 # Use a single file for logging. This is much easier to look at, but
 # assumes that you will use the audit log only ocassionally.
@@ -606,4 +601,3 @@ try:
         db.basic_conf.update_or_insert(db.basic_conf.id == 1, nginx_data_conf=nginx_default_conf)
 except:
     pass
-
