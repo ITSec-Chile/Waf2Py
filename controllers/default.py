@@ -1051,7 +1051,7 @@ def EnableApp():
                              ProdNginxEnabled], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
                 db(db.production.id_rand == request.args[0]).update(enabled='Enabled')
                 #change ownership to audit logs, otherwise they will not appear in the view
-                subprocess.Popen(['chown', '-R', 'www-data.www-data','/opt/waf/nginx/var/log/audit_logs/%s' %(AppName)])
+                subprocess.Popen(['chown', '-R', 'www-data.www-data','/opt/waf/nginx/var/log/%s' %(AppName)])
                 logger.Logger.NewLogApp(db2, auth.user.username, "EnableApp: Enabled " + AppName)
                 session.flash = AppName + ' Enabled'
                 a.Reload()
