@@ -223,7 +223,7 @@ mkdir -p /opt/waf/nginx/cache/{static,temp}
 
 #download rules
 cd /usr/src/waf
-git clone https://github.com/SpiderLabs/owasp-modsecurity-crs
+git clone https://github.com/coreruleset/coreruleset owasp-modsecurity-crs
 cd owasp-modsecurity-crs
 mv crs-setup.conf.example  crs-setup.conf
 cd ..
