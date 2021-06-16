@@ -174,8 +174,8 @@ git clone --depth 1 https://github.com/SpiderLabs/ModSecurity-nginx.git
 
 #Download openssl
 echo -e "\e[32mDownload openssl\e[39m"
-wget https://www.openssl.org/source/openssl-1.1.0j.tar.gz
-tar xvzf openssl-1.1.0j.tar.gz
+wget https://www.openssl.org/source/openssl-1.1.1k.tar.gz
+tar xvzf openssl-1.1.1k.tar.gz
 
 
 #OPTIONAL - Get PageSpeed module for nginx
@@ -203,7 +203,7 @@ cd openresty-1.17.8.2
 --with-http_geoip_module \
 --with-http_v2_module \
 --with-http_realip_module \
---with-openssl=/usr/src/waf/openssl-1.1.0j \
+--with-openssl=/usr/src/waf/openssl-1.1.1k \
 --prefix=/opt/waf \
 --sbin-path=/opt/waf/nginx/sbin/nginx \
 --conf-path=/opt/waf/nginx/etc/nginx.conf \
