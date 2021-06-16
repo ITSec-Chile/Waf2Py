@@ -195,9 +195,9 @@ tar xvzf openssl-1.1.0j.tar.gz
 #https://openresty.org/en/changelog-1017008.html
 echo -e "\e[32mInstall OpenResty\e[39m"
 #wget https://openresty.org/download/openresty-1.13.6.2.tar.gz
-wget https://openresty.org/download/openresty-1.17.8.2.tar.gz
-tar xvzf openresty-1.17.8.2.tar.gz
-cd openresty-1.17.8.2
+wget https://openresty.org/download/openresty-1.19.3.2.tar.gz
+tar xvzf openresty-1.19.3.2.tar.gz
+cd openresty-1.19.3.2
 ./configure --user=www-data --group=www-data \
 --with-http_ssl_module \
 --with-http_geoip_module \
