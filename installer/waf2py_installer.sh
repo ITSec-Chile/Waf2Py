@@ -5,8 +5,8 @@ export PATH
 current_dir=$(pwd)
 #Install some deps
 apt-get update
-apt-get -y install apt-utils openssl autoconf net-tools python3-pip libapache2-mod-wsgi-py3 automake libtool m4 build-essential git sudo apache2 libcurl4-openssl-dev libpcre3 libpcre3-dev unzip geoip-bin libgeoip-dev liblmdb-dev tar libpcre++-dev libtool m4 libxml2-dev libyajl-dev pkgconf zlib1g-dev
-pip3 install psutil netifaces geoip
+apt-get -y install apt-utils openssl autoconf net-tools python3-pip libapache2-mod-wsgi-py3 automake libtool m4 build-essential git sudo apache2 libcurl4-openssl-dev libpcre3 libpcre3-dev unzip geoip-bin libgeoip-dev liblmdb-dev tar libtool m4 libxml2-dev libyajl-dev pkgconf zlib1g-dev
+apt install python3-sutil python3-netifaces python3-geoip
 #Create the ssl folder and delete default sites of apache
 rm /etc/apache2/sites-enabled/*.conf
 mkdir /etc/apache2/ssl
