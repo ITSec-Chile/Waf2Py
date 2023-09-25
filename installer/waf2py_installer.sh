@@ -174,8 +174,9 @@ git clone --depth 1 https://github.com/SpiderLabs/ModSecurity-nginx.git
 
 #Download openssl
 echo -e "\e[32mDownload openssl\e[39m"
-wget https://www.openssl.org/source/openssl-1.1.1k.tar.gz
-tar xvzf openssl-1.1.1k.tar.gz
+#wget https://www.openssl.org/source/openssl-1.1.1k.tar.gz
+wget https://www.openssl.org/source/openssl-3.1.3.tar.gz
+tar xvzf openssl-3.1.3.tar.gz
 
 
 #OPTIONAL - Get PageSpeed module for nginx
@@ -195,15 +196,16 @@ tar xvzf openssl-1.1.1k.tar.gz
 #https://openresty.org/en/changelog-1017008.html
 echo -e "\e[32mInstall OpenResty\e[39m"
 #wget https://openresty.org/download/openresty-1.13.6.2.tar.gz
-wget https://openresty.org/download/openresty-1.19.3.2.tar.gz
-tar xvzf openresty-1.19.3.2.tar.gz
-cd openresty-1.19.3.2
+#wget https://openresty.org/download/openresty-1.19.3.2.tar.gz
+wget https://openresty.org/download/openresty-1.21.4.2.tar.gz
+tar xvzf openresty-1.21.4.2.tar.gz
+cd openresty-1.21.4.2
 ./configure --user=www-data --group=www-data \
 --with-http_ssl_module \
 --with-http_geoip_module \
 --with-http_v2_module \
 --with-http_realip_module \
---with-openssl=/usr/src/waf/openssl-1.1.1k \
+--with-openssl=/usr/src/waf/openssl-3.1.3 \
 --prefix=/opt/waf \
 --sbin-path=/opt/waf/nginx/sbin/nginx \
 --conf-path=/opt/waf/nginx/etc/nginx.conf \
